@@ -70,13 +70,14 @@ export const TaskList = styled.div`
 
 export const TaskContainer = styled.div`
     background: ${COLORS.lightOrange};
-    padding: 20px;
+    padding: 16px;
     margin: 8px 4px 8px 4px;
     border-radius: 8px;
     box-shadow: 2px 2px 8px rgba(111, 111, 111, 0.25);
 `;
 
 export const TitleTask = styled.h4`
+    font-size: 1.1em;
     margin: 2px 0 4px 0;
     padding: 0;
 `;

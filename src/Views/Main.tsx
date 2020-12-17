@@ -104,20 +104,26 @@ const Main: FC = () => {
     const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const newColumn: columnItem = columns[0];
-        newColumn.tasks.push({ id: uuid4(), content: inputContent, title: inputTitle });
-        setColumns(columns.map((column) => (column.id === newColumn.id ? newColumn : column)));
+
+        if(inputContent && inputTitle) {
+            newColumn.tasks.push({ id: uuid4(), content: inputContent, title: inputTitle });
+            setColumns(columns.map((column) => (column.id === newColumn.id ? newColumn : column)));
+        }
+
     };
 
     return (
         <Container>
             <InputWrapper onSubmit={handleAddTask}>
                 <InputTextElement
+                    required
                     type="text"
                     value={inputTitle}
                     onChange={(e) => setInputTitle(e.target.value)}
                     placeholder="Title"
                 />
                 <InputTextElement
+                    required
                     type="text"
                     value={inputContent}
                     onChange={(e) => setInputContent(e.target.value)}
