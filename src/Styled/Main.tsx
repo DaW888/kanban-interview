@@ -6,14 +6,14 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    width: 100%;
+    width: 100vw;
     min-height: 100vh;
     background-color: ${COLORS.lightBlue};
 `;
 
 export const DraggableWrapper = styled.div`
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     width: 100%;
 `;
@@ -30,7 +30,7 @@ export const InputTextElement = styled.input`
     font-size: 1.2em;
     border-radius: 8px;
     background: ${COLORS.darkBrown};
-    color: white;
+    color: ${COLORS.lightText};
 `;
 export const InputSubmitButton = styled.input`
     border: 0;
@@ -39,7 +39,7 @@ export const InputSubmitButton = styled.input`
     font-size: 1.1em;
     border-radius: 8px;
     background: ${COLORS.orange};
-    color: white;
+    color: ${COLORS.lightText};
     cursor: pointer;
 `;
 
@@ -53,12 +53,12 @@ export const ColumnContainer = styled.div`
 `;
 export const ColumnTitle = styled.h3`
     background-color: ${COLORS.blue};
-    border-radius: 16px;
+    border-radius: 8px;
     width: 100%;
     text-align: center;
-    padding: 10px 0 10px 0;
-    color: #ffffff;
-    margin: 0 0 10px 0;
+    padding: 12px 0 12px 0;
+    color: ${COLORS.lightText};
+    margin: 0 0 6px 0;
     box-shadow: 2px 2px 8px rgba(111, 111, 111, 0.4);
 `;
 export const TaskList = styled.div`
@@ -66,11 +66,20 @@ export const TaskList = styled.div`
     background: ${COLORS.darkBrown};
     border-radius: 16px;
     box-shadow: 2px 2px 8px rgba(111, 111, 111, 0.4);
+    max-height: 60vh;
+    overflow: auto;
+    min-height: 60vh;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    scrollbar-width: none;
 `;
 
 export const TaskContainer = styled.div`
     background: ${COLORS.lightOrange};
-    padding: 16px;
+    padding: 14px;
     margin: 8px 4px 8px 4px;
     border-radius: 8px;
     box-shadow: 2px 2px 8px rgba(111, 111, 111, 0.25);

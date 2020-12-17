@@ -4,4 +4,6 @@ export default {
     blue: '#627e9a',
     lightOrange: '#eaaf68',
     orange: '#8a491f',
+    lightText: '#fff',
+    darkText: '#000',
 };

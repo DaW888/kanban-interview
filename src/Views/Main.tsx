@@ -1,10 +1,8 @@
 import React, { FC, useContext, useState } from 'react';
 import { Container, DraggableWrapper, InputSubmitButton, InputTextElement, InputWrapper } from '../Styled/Main';
-import DATA from '../CONSTS/DATA';
 import Column from '../Components/Column';
 import { DragDropContext, DraggableLocation, DropResult } from 'react-beautiful-dnd';
 import { ColumnContext } from '../contexts/ColumnContext';
-import { v4 as uuid4 } from 'uuid';
 
 export interface taskItem {
     id: string;
@@ -25,17 +23,12 @@ interface dropResType {
 }
 
 const Main: FC = () => {
-    const [columns, setColumns] = useState<columnItem[]>(DATA);
     const [inputContent, setInputContent] = useState<string>('');
     const [inputTitle, setInputTitle] = useState<string>('');
+    const { columns, dispatch } = useContext(ColumnContext);
 
     const chooseColumnById = (colId: string): columnItem => {
-        const colItem = columns.find((el) => el.id === colId);
-        if (colItem) {
-            return colItem;
-        } else {
-            return { id: '', title: '', tasks: [] };
-        }
+        return columns.find((columnItem: columnItem) => columnItem.id === colId);
     };
 
     const updateSameColumn = (column: columnItem, taskList: taskItem[]): columnItem[] => {
@@ -43,8 +36,7 @@ const Main: FC = () => {
             ...column,
             tasks: taskList,
         };
-        console.log(taskList);
-        return columns.map((column) => (column.id === newColumn.id ? newColumn : column));
+        return columns.map((column: columnItem) => (column.id === newColumn.id ? newColumn : column));
     };
 
     const updateDifferentColumns = (
@@ -80,10 +72,18 @@ const Main: FC = () => {
     };
 
     const onDragEnd = (result: DropResult) => {
-        console.log(result);
         const { destination, source, draggableId }: dropResType = result;
 
-        if (!destination) return;
+        if (destination === null) {
+            if (source.droppableId === 'done') {
+                dispatch({
+                    type: 'REMOVE_TASK',
+                    columnId: source.droppableId,
+                    taskId: draggableId,
+                });
+            }
+            return;
+        }
         if (destination.droppableId === source.droppableId && destination.index === source.index) return;
 
         const startColumn = chooseColumnById(source.droppableId);
@@ -92,24 +92,25 @@ const Main: FC = () => {
         if (startColumn === finishColumn) {
             const column: columnItem = chooseColumnById(source.droppableId);
             const newTaskList: taskItem[] = reorder(column.tasks, source.index, destination.index);
-            setColumns(updateSameColumn(column, newTaskList));
+            dispatch({ type: 'UPDATE_COLUMNS', columns: updateSameColumn(column, newTaskList) });
         } else {
-            setColumns(updateDifferentColumns(startColumn, finishColumn, source.index, destination.index));
+            dispatch({
+                type: 'UPDATE_COLUMNS',
+                columns: updateDifferentColumns(startColumn, finishColumn, source.index, destination.index),
+            });
         }
     };
 
-    // const {columns} = useContext(ColumnContext);
-    // console.log('context');
-    // console.log(columns);
     const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const newColumn: columnItem = columns[0];
-
-        if(inputContent && inputTitle) {
-            newColumn.tasks.push({ id: uuid4(), content: inputContent, title: inputTitle });
-            setColumns(columns.map((column) => (column.id === newColumn.id ? newColumn : column)));
+        if (inputContent && inputTitle) {
+            dispatch({
+                type: 'ADD_TASK',
+                task: { title: inputTitle, content: inputContent },
+            });
+            setInputContent('');
+            setInputTitle('');
         }
-
     };
 
     return (

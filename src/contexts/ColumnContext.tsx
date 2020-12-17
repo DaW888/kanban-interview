@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from 'react';
 import { useEffect } from 'react';
 import { columnItem } from '../Views/Main';
 import { ColumnReducer, ColumnReducerActionsType } from "../reducers/ColumnReducer";
-import DATA from "../CONSTS/DATA";
+import START_DATA from "../CONSTS/START_DATA";
 
 type childrenProps = {
     children: React.ReactNode;
@@ -22,7 +22,7 @@ const ColumnContextProvider = ({ children }: childrenProps) => {
     // @ts-ignore
     const [columns, dispatch] = useReducer(ColumnReducer, [], () => {
         const localColumns = localStorage.getItem('columns');
-        return localColumns ? JSON.parse(localColumns): DATA;
+        return localColumns ? JSON.parse(localColumns): START_DATA;
     });
 
     useEffect(() => {

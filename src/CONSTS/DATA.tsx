@@ -1,14 +1,6 @@
 import { v4 as uuid4 } from 'uuid';
 
 export default
-    // tasks: {
-    //     task1: { id: 'task1', content: 'Ic1' },
-    //     task2: { id: 'task2', content: 'Ic2' },
-    //     task3: { id: 'task3', content: 'Ic3' },
-    //     task4: { id: 'task4', content: 'Ic4' },
-    //     task5: { id: 'task5', content: 'Ic5' },
-    //     task6: { id: 'task6', content: 'Ic6' },
-    // },
     [
         {
             id: 'toDo',
@@ -46,8 +38,5 @@ export default
                 { id: uuid4(), content: 'szesc', title: 'tyt6' },
             ],
         },
-        // inProgress: { id: 'inProgress', title: 'To Do', tasks: [] },
-        // done: { id: 'done', title: 'Done', tasks: [] },
     ];
-    // columnOrder: ['toDo'],
 
