@@ -26,7 +26,6 @@ const ColumnContextProvider = ({ children }: childrenProps) => {
     });
 
     useEffect(() => {
-        console.log(columns, dispatch);
         localStorage.setItem('columns', JSON.stringify(columns));
     }, [columns]);
 

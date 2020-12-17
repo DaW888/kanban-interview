@@ -25,7 +25,7 @@ const getTaskStyle = (draggingStyle: DraggingStyle | NotDraggingStyle, isDraggin
 
 const Task: FC<taskProps> = ({ taskItem, index }) => {
     return (
-        <Draggable draggableId={`${taskItem.id}`} index={index}>
+        <Draggable draggableId={taskItem.id} index={index}>
             {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
                 <TaskContainer
                     {...provided.draggableProps}
