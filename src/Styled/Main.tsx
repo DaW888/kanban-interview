@@ -87,11 +87,11 @@ export const TaskContainer = styled.div`
 
 export const TitleTask = styled.h4`
     font-size: 1.1em;
-    margin: 2px 0 4px 0;
-    padding: 0;
+    margin: 2px 0 6px 0;
+    padding: 2px;
 `;
 
 export const ParagraphTask = styled.p`
     margin: 0;
-    padding: 0;
+    padding: 2px;
 `;

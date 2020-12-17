@@ -6,4 +6,5 @@ export default {
     orange: '#8a491f',
     lightText: '#fff',
     darkText: '#000',
+    removingTask: 'rgba(234,175,104,0.3)',
 };

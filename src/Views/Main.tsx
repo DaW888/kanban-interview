@@ -60,7 +60,9 @@ const Main: FC = () => {
             tasks: finishTasks,
         };
 
-        const newData = columns.map((column) => (column.id === newStartColumn.id ? newStartColumn : column));
+        const newData = columns.map((column: columnItem) =>
+            column.id === newStartColumn.id ? newStartColumn : column
+        );
         return newData.map((column) => (column.id === newFinishColumn.id ? newFinishColumn : column));
     };
 
@@ -75,20 +77,18 @@ const Main: FC = () => {
         const { destination, source, draggableId }: dropResType = result;
 
         if (destination === null) {
-            if (source.droppableId === 'done') {
-                dispatch({
-                    type: 'REMOVE_TASK',
-                    columnId: source.droppableId,
-                    taskId: draggableId,
-                });
-            }
+            dispatch({
+                type: 'REMOVE_TASK',
+                columnId: source.droppableId,
+                taskId: draggableId,
+            });
             return;
         }
+
         if (destination.droppableId === source.droppableId && destination.index === source.index) return;
 
         const startColumn = chooseColumnById(source.droppableId);
         const finishColumn = chooseColumnById(destination.droppableId);
-
         if (startColumn === finishColumn) {
             const column: columnItem = chooseColumnById(source.droppableId);
             const newTaskList: taskItem[] = reorder(column.tasks, source.index, destination.index);
