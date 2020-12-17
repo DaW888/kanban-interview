@@ -1,9 +1,10 @@
 import React, { FC, useContext, useState } from 'react';
-import { Container } from '../Styled/Main';
+import { Container, DraggableWrapper, InputSubmitButton, InputTextElement, InputWrapper } from '../Styled/Main';
 import DATA from '../CONSTS/DATA';
 import Column from '../Components/Column';
 import { DragDropContext, DraggableLocation, DropResult } from 'react-beautiful-dnd';
 import { ColumnContext } from '../contexts/ColumnContext';
+import { v4 as uuid4 } from 'uuid';
 
 export interface taskItem {
     id: string;
@@ -26,6 +27,7 @@ interface dropResType {
 const Main: FC = () => {
     const [columns, setColumns] = useState<columnItem[]>(DATA);
     const [inputContent, setInputContent] = useState<string>('');
+    const [inputTitle, setInputTitle] = useState<string>('');
 
     const chooseColumnById = (colId: string): columnItem => {
         const colItem = columns.find((el) => el.id === colId);
@@ -35,7 +37,7 @@ const Main: FC = () => {
             return { id: '', title: '', tasks: [] };
         }
     };
-    
+
     const updateSameColumn = (column: columnItem, taskList: taskItem[]): columnItem[] => {
         const newColumn = {
             ...column,
@@ -50,7 +52,7 @@ const Main: FC = () => {
         finishColumn: columnItem,
         sourceIndex: number,
         destinationIndex: number
-    ): columnItem[]  => {
+    ): columnItem[] => {
         const startTasks: taskItem[] = [...startColumn.tasks];
         const [removed] = startTasks.splice(sourceIndex, 1);
 
@@ -94,26 +96,42 @@ const Main: FC = () => {
         } else {
             setColumns(updateDifferentColumns(startColumn, finishColumn, source.index, destination.index));
         }
-
     };
 
     // const {columns} = useContext(ColumnContext);
     // console.log('context');
     // console.log(columns);
+    const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const newColumn: columnItem = columns[0];
+        newColumn.tasks.push({ id: uuid4(), content: inputContent, title: inputTitle });
+        setColumns(columns.map((column) => (column.id === newColumn.id ? newColumn : column)));
+    };
 
     return (
         <Container>
-            <input
-                type="text"
-                value={inputContent}
-                onChange={(e) => setInputContent(e.target.value)}
-                placeholder="content"
-            />
-            <DragDropContext onDragEnd={onDragEnd}>
-                {columns.map((column: columnItem) => (
-                    <Column key={column.id} columnItem={column} />
-                ))}
-            </DragDropContext>
+            <InputWrapper onSubmit={handleAddTask}>
+                <InputTextElement
+                    type="text"
+                    value={inputTitle}
+                    onChange={(e) => setInputTitle(e.target.value)}
+                    placeholder="Title"
+                />
+                <InputTextElement
+                    type="text"
+                    value={inputContent}
+                    onChange={(e) => setInputContent(e.target.value)}
+                    placeholder="Content"
+                />
+                <InputSubmitButton type="submit" value="Add Task" />
+            </InputWrapper>
+            <DraggableWrapper>
+                <DragDropContext onDragEnd={onDragEnd}>
+                    {columns.map((column: columnItem) => (
+                        <Column key={column.id} columnItem={column} />
+                    ))}
+                </DragDropContext>
+            </DraggableWrapper>
         </Container>
     );
 };

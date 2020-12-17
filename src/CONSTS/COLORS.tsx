@@ -1,3 +1,7 @@
 export default {
-    backgroundColor: '#e2e2e2'
-}
+    lightBlue: '#b7bcc0',
+    darkBrown: '#471001',
+    blue: '#627e9a',
+    lightOrange: '#d79e50',
+    orange: '#8a491f',
+};

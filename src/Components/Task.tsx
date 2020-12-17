@@ -1,29 +1,24 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
-import { taskItem } from "../Views/Main";
-
-const TaskContainer = styled.div`
-    display: block;
-    background: white;
-    padding: 20px;
-    margin: 4px;
-    border-radius: 8px;
-`;
+import { taskItem } from '../Views/Main';
+import { ParagraphTask, TaskContainer, TitleTask } from '../Styled/Main';
 
 type taskProps = {
-    taskItem: taskItem,
-    index: number,
-}
+    taskItem: taskItem;
+    index: number;
+};
 
-const Task: FC<taskProps> = ({taskItem, index}) => {
+
+
+const Task: FC<taskProps> = ({ taskItem, index }) => {
     return (
         <Draggable draggableId={`${taskItem.id}`} index={index}>
             {(provided) => (
                 <TaskContainer {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                    {taskItem.content}
+                    <TitleTask>{taskItem.title}</TitleTask>
+                    <ParagraphTask>{taskItem.content}</ParagraphTask>
                 </TaskContainer>
-                )}
+            )}
         </Draggable>
     );
 };
