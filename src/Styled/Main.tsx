@@ -21,6 +21,11 @@ export const DraggableWrapper = styled.div`
 export const InputWrapper = styled.form`
     display: flex;
     flex-direction: column;
+    @media (max-width: 768px) {
+        margin-top: 2em;
+        width: 80vw;
+        max-width: 360px;
+    }
 `;
 
 export const InputTextElement = styled.input`
@@ -53,6 +58,10 @@ export const ColumnContainer = styled.div`
     max-width: 300px;
     width: 25vw;
     margin: 1.6rem;
+    @media (max-width: 768px) {
+        width: 80vw;
+        max-width: 360px;
+    }
 `;
 export const ColumnTitle = styled.h3`
     background-color: ${COLORS.blue};
@@ -76,6 +85,10 @@ export const TaskList = styled.div`
 
     &::-webkit-scrollbar {
         display: none;
+    }
+
+    @media (max-width: 768px) {
+        min-height: 30vh;
     }
 
     scrollbar-width: none;
