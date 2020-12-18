@@ -40,8 +40,8 @@ export const InputTextElement = styled.input`
 `;
 export const InputSubmitButton = styled.input`
     border: 0;
-    margin: 4px;
-    padding: 6px;
+    margin: 10px 4px 10px 4px;
+    padding: 8px;
     font-size: 1.1em;
     font-weight: bold;
     border-radius: 8px;
@@ -49,6 +49,10 @@ export const InputSubmitButton = styled.input`
     color: ${COLORS.lightText};
     cursor: pointer;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+
+    @media (max-width: 768px) {
+        padding: 12px;
+    }
 `;
 
 export const ColumnContainer = styled.div`
