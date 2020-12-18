@@ -8,14 +8,14 @@ export const Container = styled.div`
     flex-direction: column;
     width: 100vw;
     min-height: 100vh;
-    background-color: ${COLORS.lightBlue};
+    background-color: ${COLORS.background};
 `;
 
 export const DraggableWrapper = styled.div`
     display: flex;
     align-items: start;
     justify-content: center;
-    width: 100%;
+    flex-wrap: wrap;
 `;
 
 export const InputWrapper = styled.form`
@@ -29,18 +29,21 @@ export const InputTextElement = styled.input`
     padding: 12px;
     font-size: 1.2em;
     border-radius: 8px;
-    background: ${COLORS.darkBrown};
+    background: ${COLORS.dark};
     color: ${COLORS.lightText};
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 `;
 export const InputSubmitButton = styled.input`
     border: 0;
     margin: 4px;
     padding: 6px;
     font-size: 1.1em;
+    font-weight: bold;
     border-radius: 8px;
     background: ${COLORS.orange};
     color: ${COLORS.lightText};
     cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 `;
 
 export const ColumnContainer = styled.div`
@@ -49,7 +52,7 @@ export const ColumnContainer = styled.div`
     min-width: 240px;
     max-width: 300px;
     width: 25vw;
-    margin: 2rem;
+    margin: 1.6rem;
 `;
 export const ColumnTitle = styled.h3`
     background-color: ${COLORS.blue};
@@ -59,13 +62,14 @@ export const ColumnTitle = styled.h3`
     padding: 12px 0 12px 0;
     color: ${COLORS.lightText};
     margin: 0 0 6px 0;
-    box-shadow: 2px 2px 8px rgba(111, 111, 111, 0.4);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 `;
 export const TaskList = styled.div`
     padding: 4px;
-    background: ${COLORS.darkBrown};
+    background: ${COLORS.dark};
     border-radius: 16px;
-    box-shadow: 2px 2px 8px rgba(111, 111, 111, 0.4);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+
     max-height: 60vh;
     overflow: auto;
     min-height: 60vh;
@@ -78,20 +82,22 @@ export const TaskList = styled.div`
 `;
 
 export const TaskContainer = styled.div`
-    background: ${COLORS.lightOrange};
+    background: ${COLORS.white};
     padding: 14px;
     margin: 8px 4px 8px 4px;
     border-radius: 8px;
-    box-shadow: 2px 2px 8px rgba(111, 111, 111, 0.25);
+    box-shadow: 2px 2px 8px rgba(111, 111, 111, 0.1);
 `;
 
 export const TitleTask = styled.h4`
     font-size: 1.1em;
     margin: 2px 0 6px 0;
     padding: 2px;
+    color: ${COLORS.titleText};
 `;
 
 export const ParagraphTask = styled.p`
     margin: 0;
     padding: 2px;
+    color: ${COLORS.darkText};
 `;
